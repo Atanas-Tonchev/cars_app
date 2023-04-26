@@ -23,16 +23,18 @@ public class Car {
         return model;
     }
 
-    public void setModel(String model) {
+    public String setModel(String model) {
         this.model = model;
+        return model;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public int setYear(int year) {
         this.year = year;
+        return year;
     }
 
     public double getPrice() {

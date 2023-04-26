@@ -23,8 +23,9 @@ public class TypeB extends Car{
     }
 
     @Override
-    public void setModel(String model) {
+    public String setModel(String model) {
         super.setModel(model);
+        return model;
     }
 
     @Override
@@ -33,8 +34,9 @@ public class TypeB extends Car{
     }
 
     @Override
-    public void setYear(int year) {
+    public int setYear(int year) {
         super.setYear(year);
+        return year;
     }
 
     @Override
