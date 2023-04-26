@@ -1,13 +1,10 @@
 package www.haemimont.cars_app.types;
+
 import www.haemimont.cars_app.model.Car;
 
 public class TypeA extends Car {
-    int id;
-    public TypeA(int id,String newModel, int newYear, double newPrice) {
-        this.id=id;
-        super.model = newModel;
-        super.year = newYear;
-        super.price=newPrice;
+    public TypeA(String newModel, int newYear, double newPrice) {
+        super(newModel, newYear, newPrice);
     }
 
     @Override
@@ -17,8 +14,7 @@ public class TypeA extends Car {
 
     @Override
     public String setModel(String model) {
-        super.setModel(model);
-        return model;
+        return super.setModel(model);
     }
 
     @Override
@@ -28,8 +24,7 @@ public class TypeA extends Car {
 
     @Override
     public int setYear(int year) {
-        super.setYear(year);
-        return year;
+        return super.setYear(year);
     }
 
     @Override
@@ -42,12 +37,12 @@ public class TypeA extends Car {
         super.setPrice(price);
     }
 
-    public TypeA() {
-    }
-
-
     @Override
     public String toString() {
-        return id + "." + " || " + model + " || " + year + " || " + price + " || " + " TypeA ||";
+        return "TypeA{" +
+                "model='" + model + '\'' +
+                ", year=" + year +
+                ", price=" + price +
+                '}';
     }
 }

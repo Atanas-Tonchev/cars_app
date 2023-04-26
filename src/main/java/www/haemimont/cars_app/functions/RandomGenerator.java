@@ -1,77 +1,53 @@
 package www.haemimont.cars_app.functions;
+import www.haemimont.cars_app.model.Car;
 import www.haemimont.cars_app.types.TypeA;
 import www.haemimont.cars_app.types.TypeB;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomGenerator {
 
-    TypeA typeA = new TypeA();
-    TypeB typeB = new TypeB();
-    static int number;
-    static int year;
-    static double price;
-    static String[] carsMake = {"Audi","BMW","Volvo","Mercedes","Peugeot","Citroen","Opel","Ford","Fiat","Alfa Romeo"};
-    public ArrayList<Double> arrayListPrice(){
-        ArrayList<Double> arrayListPrice = new ArrayList<>();
-        for(price = 10.000; price<=100.000; price+=9.8){
-            Random random = new Random();
-            number = 1+random.nextInt(1000000);
-            typeA.setPrice(price);
-            System.out.println("Type A price is: "+typeA.getPrice());
-            typeB.setPrice(price);
-            System.out.println("Type B price is: "+typeB.getPrice());
-            arrayListPrice.add(typeA.getPrice());
-            arrayListPrice.add(typeB.getPrice());
+    private static final double MIN_PRICE = 1000.00, MAX_PRICE = 200000.00;
 
-        }
-        return arrayListPrice;
+    static String[] carsMake = {"Audi","BMW","Volvo","Mercedes","Peugeot","Citroen","Opel","Ford","Fiat","Alfa Romeo"
+    ,"Aston Martin","Nissan","Kia","Honda","Renault","Chevrolet","Mitsubishi","Toyota"};
+
+
+    public double getRandomPrice() {
+        return Math.round(ThreadLocalRandom.current().nextDouble(MIN_PRICE, MAX_PRICE));
     }
-    public Map<Integer,ArrayList> RandomGenerator(){
-        Map<Integer,ArrayList> map = new HashMap<>();
-        ArrayList<Integer> arrayListYear = new ArrayList<>();
-        ArrayList<String> arrayListModel = new ArrayList<>();
-        ArrayList<Double> arrayListPrice = new ArrayList<>();
 
-        for(price = 10.000; price<50.000; price+=4.400){
-            Random random = new Random();
-            number = 1+random.nextInt(1000000);
-            typeA.setPrice(price);
-            System.out.println("Type A price is: "+typeA.getPrice());
-            typeB.setPrice(price);
-            System.out.println("Type B price is: "+typeB.getPrice());
-            arrayListPrice.add(typeA.getPrice());
-            arrayListPrice.add(typeB.getPrice());
-            map.put(number,arrayListPrice);
-        }
-
-        for(int i=0; i<carsMake.length; i++){
-            Random random = new Random();
-            number = 1+random.nextInt(1000000);
-            typeA.setModel(carsMake[i]);
-            System.out.println("Type A model is: "+typeA.getModel());
-            typeB.setModel(carsMake[i]);
-            System.out.println("Type B model is: "+typeB.getModel());
-            arrayListModel.add(typeA.getModel());
-            arrayListModel.add(typeB.getModel());
-            map.put(number,arrayListModel);
-
-        }
-
-        for (year = 2000 ;year <= 2023 ; year++) {
-
-            Random random = new Random();
-            number = 1+random.nextInt(1000000);
-            typeA.setYear(year);
-            System.out.println("Type A year is: "+typeA.getYear());
-            typeB.setYear(year);
-            System.out.println("Type B year is: "+typeB.getYear());
-            arrayListYear.add(typeA.getYear());
-            arrayListYear.add(typeB.getYear());
-            map.put(number,arrayListYear);
-        }
-
-        System.out.println(map);
-        return map;
+    public int getRandomYear(int yearFrom,int yearTo) {
+        return ThreadLocalRandom.current().nextInt(yearFrom, yearTo);
     }
+
+    public String getRandomCarMake() {
+        return carsMake[ThreadLocalRandom.current().nextInt(0, carsMake.length)];
+    }
+
+    public List<Car> generateCars(int count,int yearFrom,int yearTo,String model){
+        List<Car> cars = new ArrayList<>();
+
+        model = getRandomCarMake();
+
+        for (int i = 0; i < count; i++){
+
+            Random random = new Random();
+            int number = random.nextInt(2);
+
+            if(number>0){
+                cars.add(new TypeA(model,getRandomYear(yearFrom,yearTo),getRandomPrice()));
+            } else {
+                cars.add(new TypeB(model,getRandomYear(yearFrom,yearTo), getRandomPrice()));
+            }
+
+
+            System.out.println(cars);
+        }
+
+        return cars;
+    }
+
+
 }

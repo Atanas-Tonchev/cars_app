@@ -11,14 +11,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         RandomGenerator generator = new RandomGenerator();
+        Calculator calculator = new Calculator();
         // get the start time
         long start = System.currentTimeMillis();
 
         // call the method
+        int c = 1000;
 
-        Calculator calculator = new Calculator();
-        //calculator.AverageCalculatorPrice();
-        generator.RandomGenerator();
+        generator.generateCars(c,2011,2050,"Audi");
+        calculator.Sum(c,2.1);
 
         // get the end time
         long end = System.currentTimeMillis();
