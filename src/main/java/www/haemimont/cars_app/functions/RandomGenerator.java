@@ -18,7 +18,9 @@ public class RandomGenerator {
             Random random = new Random();
             number = 1+random.nextInt(1000000);
             typeA.setPrice(price);
+            System.out.println("Type A price is: "+typeA.getPrice());
             typeB.setPrice(price);
+            System.out.println("Type B price is: "+typeB.getPrice());
             arrayListPrice.add(typeA.getPrice());
             arrayListPrice.add(typeB.getPrice());
 
@@ -35,7 +37,9 @@ public class RandomGenerator {
             Random random = new Random();
             number = 1+random.nextInt(1000000);
             typeA.setPrice(price);
+            System.out.println("Type A price is: "+typeA.getPrice());
             typeB.setPrice(price);
+            System.out.println("Type B price is: "+typeB.getPrice());
             arrayListPrice.add(typeA.getPrice());
             arrayListPrice.add(typeB.getPrice());
             map.put(number,arrayListPrice);
@@ -45,23 +49,28 @@ public class RandomGenerator {
             Random random = new Random();
             number = 1+random.nextInt(1000000);
             typeA.setModel(carsMake[i]);
+            System.out.println("Type A model is: "+typeA.getModel());
             typeB.setModel(carsMake[i]);
+            System.out.println("Type B model is: "+typeB.getModel());
             arrayListModel.add(typeA.getModel());
             arrayListModel.add(typeB.getModel());
             map.put(number,arrayListModel);
+
         }
 
         for (year = 2000 ;year <= 2023 ; year++) {
 
             Random random = new Random();
             number = 1+random.nextInt(1000000);
-
             typeA.setYear(year);
+            System.out.println("Type A year is: "+typeA.getYear());
             typeB.setYear(year);
+            System.out.println("Type B year is: "+typeB.getYear());
             arrayListYear.add(typeA.getYear());
             arrayListYear.add(typeB.getYear());
             map.put(number,arrayListYear);
         }
+
         System.out.println(map);
         return map;
     }

@@ -17,8 +17,8 @@ public class Main {
         // call the method
 
         Calculator calculator = new Calculator();
-        calculator.AverageCalculatorPrice();
-        //generator.RandomGenerator();
+        //calculator.AverageCalculatorPrice();
+        generator.RandomGenerator();
 
         // get the end time
         long end = System.currentTimeMillis();
