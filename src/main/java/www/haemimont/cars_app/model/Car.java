@@ -14,6 +14,11 @@ public class Car {
         year = newYear;
         price = newPrice;
     }
+
+    public Car() {
+
+    }
+
     public String getModel() {
         return model;
     }

@@ -1,52 +1,63 @@
 package www.haemimont.cars_app.functions;
 
 
-import java.util.Scanner;
+import www.haemimont.cars_app.model.Car;
+
+import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator {
+    double sum1=0;
+    int yearF;
+    int yearT;
+    int count;
 
-    RandomGenerator generator = new RandomGenerator();
 
-    public void AverageSum() {
-        boolean quit = false;
-        String toQuit;
 
-        // get the start time
-        long start = System.currentTimeMillis();
 
-        // call the method
-        Scanner scanner = new Scanner(System.in);
 
-        while (!quit) {
+    int threadNum = 2 /*ManagementFactory.getThreadMXBean().getThreadCount()*/;
 
-            System.out.println("Please input Param:");
-            double param = scanner.nextDouble();
-            System.out.println("Please input Count:");
-            int count = scanner.nextInt();
 
-            double price = generator.getRandomPrice();
-            System.out.println("Generated price: " +price);
-            double sum = (price * param) / count;
-            System.out.println("The average sum is: " + sum);
+    public void AverageSingleThreadSum(int yearF,int yearT,double param, int count) {
+        RandomGenerator generator = new RandomGenerator();
 
-            // get the end time
-            long end = System.currentTimeMillis();
+        List<Car> cars = generator.generateCars(yearF,yearT,count);
 
-            // execution time
-            long execution = end - start;
-            System.out.println("Execution time: " + execution + " ms");
-            scanner.nextLine();
-            System.out.println("Press 'Q' to quit or any key to continue");
-            toQuit = scanner.next();
-            if (toQuit.equalsIgnoreCase("Q"))
-                quit = true;
+        for (int i=0; i<cars.size();i++) {
+            sum1 = (cars.get(i).getPrice() + sum1);
         }
-        scanner.close();
-        System.out.println("Good Bye");
+        double sum = (sum1 * param) / count;
+        System.out.println("Single Thread average sum is: " + sum);
 
     }
 
-    public static void main(String[] args) {
+    public void AverageMultiThreadSum(int yearF,int yearT,double param, int count) {
+        RandomGenerator generator = new RandomGenerator();
 
+        List<Car> cars = generator.generateCars(yearF,yearT,count);
+
+        for (int i=0; i<cars.size();i++) {
+            sum1 = (cars.get(i).getPrice() + sum1);
+        }
+
+        for(int i=1; i<threadNum;i++) {
+            double averageThreadSum = ((sum1*param)/count)/threadNum;
+            System.out.println("Multi Thread average sum is: " + averageThreadSum);
+        }
+
+    }
+
+    public void setYearF(int yearF) {
+        this.yearF = yearF;
+    }
+
+    public void setYearT(int yearT) {
+        this.yearT = yearT;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }
