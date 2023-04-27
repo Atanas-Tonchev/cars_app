@@ -26,28 +26,58 @@ public class RandomGenerator {
         return carsMake[ThreadLocalRandom.current().nextInt(0, carsMake.length)];
     }
 
-    public List<Car> generateCars(int count,int yearFrom,int yearTo,String model){
+    public void generateCars(){
+        boolean quit = false;
+        String toQuit;
+
         List<Car> cars = new ArrayList<>();
 
-        model = getRandomCarMake();
 
-        for (int i = 0; i < count; i++){
+        // get the start time
+        long start = System.currentTimeMillis();
 
-            Random random = new Random();
-            int number = random.nextInt(2);
+        // call the method
+        Scanner scanner = new Scanner(System.in);
 
-            if(number>0){
-                cars.add(new TypeA(model,getRandomYear(yearFrom,yearTo),getRandomPrice()));
-            } else {
-                cars.add(new TypeB(model,getRandomYear(yearFrom,yearTo), getRandomPrice()));
-            }
+        while (!quit) {
 
+            System.out.println("Please input Param:");
+            double param = scanner.nextDouble();
+            System.out.println("Please input Year From:");
+            int yearF = scanner.nextInt();
+            System.out.println("Please input Year To:");
+            int yearT = scanner.nextInt();
+            System.out.println("Please input Model:");
+            String model = scanner.next();
+            System.out.println("Please input Count:");
+            int count = scanner.nextInt();
 
-            System.out.println(cars);
+                 for (int i = 0; i < count; i++){
+                     model = getRandomCarMake();
+                     Random random = new Random();
+                     int number = random.nextInt(2);
+                        if(number>0){
+                            cars.add(new TypeA(model,getRandomYear(yearF,yearT),getRandomPrice()));
+                        } else {
+                            cars.add(new TypeB(model,getRandomYear(yearF,yearT), getRandomPrice()));
+                        }
+                    }
+
+            System.out.println("Your results is: " +cars);
+
+            // get the end time
+            long end = System.currentTimeMillis();
+
+            // execution time
+            long execution = end - start;
+            System.out.println("Execution time: " + execution + " ms");
+            scanner.nextLine();
+            System.out.println("Press 'Q' to quit or any key to continue");
+            toQuit = scanner.next();
+            if (toQuit.equalsIgnoreCase("Q"))
+                quit = true;
         }
-
-        return cars;
+        scanner.close();
+        System.out.println("Good Bye");
     }
-
-
 }
