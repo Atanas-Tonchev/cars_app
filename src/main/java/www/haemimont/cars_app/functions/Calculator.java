@@ -45,4 +45,8 @@ public class Calculator {
         System.out.println("Good Bye");
 
     }
+
+    public static void main(String[] args) {
+
+    }
 }
