@@ -27,10 +27,11 @@ public class Filter {
         int yearT = scanner.nextInt();
         System.out.println("Please input Count:");
         int count = scanner.nextInt();
+
         RandomGenerator generator = new RandomGenerator();
         Calculator calculator = new Calculator();
-
         List<Car> cars = generator.generateCars(yearF,yearT,count);
+
         double pricesSum = 0;
         for (int i=0; i<count; i++){
             pricesSum += cars.get(i).getPrice();
