@@ -46,7 +46,7 @@ public class MyRunnable implements Runnable{
 
         // execution time
         long execution = end - start;
-        System.out.println("Average sum multi treads: " +getSum()*threadNum);
+        System.out.println("Multi Thread average sum is: " +getSum()*threadNum);
         System.out.println("Execution time for Multi Thread: " + execution *threadNum + " ms");
     }
 

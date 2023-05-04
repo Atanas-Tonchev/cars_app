@@ -17,6 +17,6 @@ public class Calculator {
 
         // execution time
         long execution = end - start;
-        System.out.println("Execution time for Single: " + execution + " ms");
+        System.out.println("Execution time for Single Thread: " + execution + " ms");
     }
 }
