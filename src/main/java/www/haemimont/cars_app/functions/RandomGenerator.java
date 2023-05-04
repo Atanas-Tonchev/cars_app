@@ -31,8 +31,6 @@ public class RandomGenerator {
 
         List<Car> cars = new ArrayList<>();
 
-
-
         // get the start time
         long start = System.currentTimeMillis();
 

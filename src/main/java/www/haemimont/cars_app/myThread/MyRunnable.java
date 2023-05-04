@@ -1,60 +1,53 @@
 package www.haemimont.cars_app.myThread;
-import www.haemimont.cars_app.functions.Calculator;
-import www.haemimont.cars_app.functions.RandomGenerator;
-
-import java.lang.management.ManagementFactory;
 
 
 public class MyRunnable implements Runnable{
 
-    Calculator calculator = new Calculator();
+    private final int threadNum;
+    private final double priceMulti;
+    private final double param;
+    private final int count;
+    private double sum;
 
-    private double param;
-    private int count;
-    private int yearF;
-    private int yearT;
 
-
-   /* public MyRunnable(int threadNum) {
+    public MyRunnable(int threadNum, double priceMulti, double param, int count) {
         this.threadNum = threadNum;
-    }*/
+        this.priceMulti = priceMulti;
+        this.param = param;
+        this.count = count;
+    }
+    // get the start time
+    long start = System.currentTimeMillis();
+
+    // call the method
 
     @Override
     public void run() {
 
+        sum = ((priceMulti/threadNum)*(param))/(count);
 
-        // get the start time
-        long start = System.currentTimeMillis();
 
-        // call the method
-        calculator.AverageSingleThreadSum(yearF,yearT,param,count);
+        /*try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }*/
+
+    }
+
+    public double getSum() {
+        return sum;
+    }
+
+    public void AverageSumExecutionTimeMultiThread(){
 
         // get the end time
         long end = System.currentTimeMillis();
 
         // execution time
         long execution = end - start;
-        System.out.println("Execution time for Single Thread Average Sum: " + execution + " ms");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-    public void setParam(double param) {
-        this.param = param;
+        System.out.println("Average sum multi treads: " +getSum()*threadNum);
+        System.out.println("Execution time for Multi Thread: " + execution *threadNum + " ms");
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public void setYearF(int yearF) {
-        this.yearF = yearF;
-    }
-
-    public void setYearT(int yearT) {
-        this.yearT = yearT;
-    }
 }
