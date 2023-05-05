@@ -6,11 +6,10 @@ import java.io.File;
 
 public class MyRunnable implements Runnable {
     private final double sum;
-    private final int threadNum;
 
-    public MyRunnable(double sum,int threadNum) {
+    public MyRunnable(double sum) {
         this.sum = sum;
-        this.threadNum = threadNum;
+
     }
 
     @Override

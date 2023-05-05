@@ -1,8 +1,7 @@
 package www.haemimont.cars_app;
 import www.haemimont.cars_app.functions.Calculator;
-import www.haemimont.cars_app.functions.MyCallable;
 import www.haemimont.cars_app.functions.RandomGenerator;
-import www.haemimont.cars_app.myThread.MyRunnable;
+
 
 import java.util.Scanner;
 import java.util.concurrent.*;
@@ -56,8 +55,6 @@ public class Filter {
 
     }
 
-    public void setSum(double sum) {
-    }
 }
 
 

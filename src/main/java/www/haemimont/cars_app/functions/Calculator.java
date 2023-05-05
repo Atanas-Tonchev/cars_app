@@ -24,20 +24,6 @@ public class Calculator {
                 averageSum = ((pricesSum * param) / count);
             }
 
-       /* ExecutorService executor = Executors.newFixedThreadPool(threadNum);
-        MyCallable task = new MyCallable(averageSum);
-        Future<Double> future = executor.submit(task);
-        MyRunnable runnable = new MyRunnable(future.get(), threadNum);
-        Thread thread = new Thread(runnable);
-        thread.start();
-
-        for (threadNum=2; threadNum<=4; threadNum++) {
-            runnable = new MyRunnable(future.get()/threadNum,threadNum);
-            thread = new Thread(runnable);
-            thread.start();
-        }
-        executor.shutdown();
-*/
         return averageSum;
     }
     public double HoldThread() throws ExecutionException, InterruptedException {
@@ -46,12 +32,12 @@ public class Calculator {
         ExecutorService executor = Executors.newFixedThreadPool(threadNum);
         MyCallable task = new MyCallable(this.averageSum);
         Future<Double> future = executor.submit(task);
-        MyRunnable runnable = new MyRunnable(future.get(), threadNum);
+        MyRunnable runnable = new MyRunnable(future.get());
         Thread thread = new Thread(runnable);
         thread.start();
 
         for (threadNum=2; threadNum<=4; threadNum++) {
-            runnable = new MyRunnable(future.get()/threadNum,threadNum);
+            runnable = new MyRunnable(future.get()/threadNum);
             thread = new Thread(runnable);
             thread.start();
         }
