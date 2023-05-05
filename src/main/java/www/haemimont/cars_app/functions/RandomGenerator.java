@@ -1,7 +1,7 @@
 package www.haemimont.cars_app.functions;
 import www.haemimont.cars_app.model.Car;
-import www.haemimont.cars_app.types.TypeA;
-import www.haemimont.cars_app.types.TypeB;
+import www.haemimont.cars_app.model.TypeA;
+import www.haemimont.cars_app.model.TypeB;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -31,10 +31,6 @@ public class RandomGenerator {
 
         List<Car> cars = new ArrayList<>();
 
-        // get the start time
-        long start = System.currentTimeMillis();
-
-        // call the method
         for (int i = 0; i < count; i++) {
             Random random = new Random();
             int number = random.nextInt(2);
@@ -48,14 +44,7 @@ public class RandomGenerator {
 
         }
 
-        System.out.println("Your results is: " + count+ " cars");
 
-        // get the end time
-        long end = System.currentTimeMillis();
-
-        // execution time
-        long execution = end - start;
-        System.out.println("Execution time for Generator: " + execution + " ms");
         return cars;
     }
 }

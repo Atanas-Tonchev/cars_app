@@ -1,53 +1,31 @@
 package www.haemimont.cars_app.myThread;
 
+import www.haemimont.cars_app.Filter;
 
-public class MyRunnable implements Runnable{
+import java.io.File;
 
+public class MyRunnable implements Runnable {
+    private final double sum;
     private final int threadNum;
-    private final double priceMulti;
-    private final double param;
-    private final int count;
-    private double sum;
 
-
-    public MyRunnable(int threadNum, double priceMulti, double param, int count) {
+    public MyRunnable(double sum,int threadNum) {
+        this.sum = sum;
         this.threadNum = threadNum;
-        this.priceMulti = priceMulti;
-        this.param = param;
-        this.count = count;
     }
-    // get the start time
-    long start = System.currentTimeMillis();
-
-    // call the method
 
     @Override
     public void run() {
 
-        sum = ((priceMulti/threadNum)*(param))/(count);
+        /*if (threadNum==1){
+            getSum();
+        }
 
-
-        /*try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        if (threadNum!=1){
+            double v = getSum() * threadNum;
         }*/
-
     }
 
     public double getSum() {
         return sum;
     }
-
-    public void AverageSumExecutionTimeMultiThread(){
-
-        // get the end time
-        long end = System.currentTimeMillis();
-
-        // execution time
-        long execution = end - start;
-        System.out.println("Multi Thread average sum is: " +getSum()*threadNum);
-        System.out.println("Execution time for Multi Thread: " + execution *threadNum + " ms");
-    }
-
 }

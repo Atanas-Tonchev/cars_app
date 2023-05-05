@@ -1,21 +1,17 @@
 package www.haemimont.cars_app;
 import www.haemimont.cars_app.functions.Calculator;
+import www.haemimont.cars_app.functions.MyCallable;
 import www.haemimont.cars_app.functions.RandomGenerator;
-import www.haemimont.cars_app.model.Car;
 import www.haemimont.cars_app.myThread.MyRunnable;
 
-import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.*;
 
 public class Filter {
 
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
 
-        int threadNum = 0;
-        for(threadNum = 1; threadNum<=Runtime.getRuntime().availableProcessors(); threadNum++){
-           // System.out.println("Total Number of threads " + threadNum);
-        }
 
         Scanner scanner = new Scanner(System.in);
 
@@ -27,23 +23,41 @@ public class Filter {
         int yearT = scanner.nextInt();
         System.out.println("Please input Count:");
         int count = scanner.nextInt();
-
+        System.out.println("Your results is: " + count + " cars");
         RandomGenerator generator = new RandomGenerator();
         Calculator calculator = new Calculator();
-        List<Car> cars = generator.generateCars(yearF,yearT,count);
 
-        double pricesSum = 0;
-        for (int i=0; i<count; i++){
-            pricesSum += cars.get(i).getPrice();
+        long start = System.currentTimeMillis();
+        double sum = calculator.AverageThreadSum(generator.generateCars(yearF,yearT,count),param,count);
+        System.out.println("Average sum for single thread is: " +sum);
+        long end = System.currentTimeMillis();
+        System.out.println("Execution time for single thread is: " +calculator.ExecuteTime(start,end));
+        start = System.currentTimeMillis();
+        sum = calculator.HoldThread();
+        System.out.println("Average sum for multi thread is: " +sum);
+        end = System.currentTimeMillis();
+        System.out.println("Execution time for multi thread is: " +calculator.ExecuteTime(start,end));
+
+
+        /*ExecutorService executor = Executors.newFixedThreadPool(threadNum);
+        MyCallable task = new MyCallable(sum);
+        Future<Double> future = executor.submit(task);
+        MyRunnable runnable = new MyRunnable(future.get(), threadNum);
+        Thread thread = new Thread(runnable);
+        thread.start();
+
+        for (threadNum=2; threadNum<=4; threadNum++) {
+            runnable = new MyRunnable(future.get()/threadNum,threadNum);
+            thread = new Thread(runnable);
+            thread.start();
         }
-        calculator.AverageSingleThreadSum(pricesSum,param,count);
+        executor.shutdown();*/
 
-        MyRunnable r = new MyRunnable(threadNum, pricesSum, param, count);
-        Thread t = new Thread(r);
-        t.start();
-        t.join();
-        r.AverageSumExecutionTimeMultiThread();
 
     }
+
+    public void setSum(double sum) {
+    }
 }
+
 

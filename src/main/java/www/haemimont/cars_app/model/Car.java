@@ -4,45 +4,19 @@ package www.haemimont.cars_app.model;
 public class Car {
 
 
-    public String model;
-    public int year;
-    public  double price;
+    private final String model;
+    private final int year;
+    private final double price;
 
 
-    public Car(String newModel, int newYear, double newPrice) {
-        model = newModel;
-        year = newYear;
-        price = newPrice;
-    }
-
-    public Car() {
-
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public String setModel(String model) {
+    public Car(String model, int year, double price) {
         this.model = model;
-        return model;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int setYear(int year) {
         this.year = year;
-        return year;
+        this.price = price;
     }
 
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     @Override
