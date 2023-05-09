@@ -11,7 +11,7 @@ public class MyCallable implements Callable<Double> {
 
     @Override
     public Double call(){
-        System.out.println(Thread.currentThread().getName());
+        //System.out.println(Thread.currentThread().getName());
         return sum;
     }
 
