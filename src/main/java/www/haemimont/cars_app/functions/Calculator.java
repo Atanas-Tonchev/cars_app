@@ -10,7 +10,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class Calculator {
-
     private double averageSum;
     private final double param;
     private final int yearFrom;

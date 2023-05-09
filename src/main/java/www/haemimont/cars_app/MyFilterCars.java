@@ -8,7 +8,6 @@ public class MyFilterCars {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
 
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please input Param:");
