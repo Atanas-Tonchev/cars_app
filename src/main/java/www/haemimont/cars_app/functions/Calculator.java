@@ -29,7 +29,7 @@ public class Calculator {
     public double AverageSum(int threadNum) throws ExecutionException, InterruptedException {
         List<Car> cars = generator.generateCars(getYearFrom(),getYearTo(),getCount());
 
-        if(threadNum == 1) {
+        if (threadNum == 1) {
             for (int i = 0; i < count; i++) {
                 averageSum += cars.get(i).getPrice();
                 averageSum = ((averageSum * getParam()) / getCount());
@@ -37,31 +37,30 @@ public class Calculator {
             ExecutorService executor = Executors.newFixedThreadPool(threadNum);
             List<Future<Double>> myList = new ArrayList<>();
             for (int i = 1; i <= threadNum; i++) {
-                Future<Double> future = executor.submit(new MyCallable(averageSum / threadNum, i));
+                Future<Double> future = executor.submit(new MyCallable(averageSum / threadNum));
                 myList.add(future);
             }
             for (Future<Double> f : myList) {
                 averageSum = f.get() * threadNum;
             }
             executor.shutdown();
-            return averageSum;
 
         }else {
             ExecutorService executor = Executors.newFixedThreadPool(threadNum);
             List<Future<Double>> myList = new ArrayList<>();
             for (int i = 1; i <= threadNum; i++) {
-                Future<Double> future = executor.submit(new MyCallable(averageSum / threadNum, i));
+                Future<Double> future = executor.submit(new MyCallable(averageSum / threadNum));
                 myList.add(future);
             }
             for (Future<Double> f : myList) {
                 averageSum = f.get() * threadNum;
             }
             executor.shutdown();
-            return averageSum;
         }
+        return averageSum;
     }
     public long ExecuteTime(long startTime,long endTime) {
-        long execution = 0;
+        long execution;
         execution = endTime - startTime;
         return execution;
     }
