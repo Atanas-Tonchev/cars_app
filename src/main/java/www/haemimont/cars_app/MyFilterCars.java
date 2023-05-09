@@ -3,7 +3,7 @@ import www.haemimont.cars_app.functions.Calculator;
 import java.util.Scanner;
 import java.util.concurrent.*;
 
-public class Filter {
+public class MyFilterCars {
 
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
