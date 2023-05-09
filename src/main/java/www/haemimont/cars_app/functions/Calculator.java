@@ -1,8 +1,8 @@
 package www.haemimont.cars_app.functions;
-
 import www.haemimont.cars_app.model.Car;
-import www.haemimont.cars_app.myThread.MyRunnable;
+import www.haemimont.cars_app.myThread.MyCallable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -12,38 +12,53 @@ import java.util.concurrent.Future;
 public class Calculator {
 
     private double averageSum;
-    private int threadNum;
+    private final double param;
+    private final int yearFrom;
+    private final int yearTo;
+    private final int count;
 
-
-
-    public double AverageThreadSum(List<Car> cars,double param, int count) throws ExecutionException, InterruptedException {
-        threadNum = 1;
-            double pricesSum = 0;
-            for (int i = 0; i < count; i++) {
-                pricesSum += cars.get(i).getPrice();
-                averageSum = ((pricesSum * param) / count);
-            }
-
-        return averageSum;
+    public Calculator(int yearFrom, int yearTo, int count,double param) {
+        this.yearFrom = yearFrom;
+        this.yearTo = yearTo;
+        this.count = count;
+        this.param = param;
     }
-    public double HoldThread() throws ExecutionException, InterruptedException {
 
-        threadNum = 1;
-        ExecutorService executor = Executors.newFixedThreadPool(threadNum);
-        MyCallable task = new MyCallable(this.averageSum);
-        Future<Double> future = executor.submit(task);
-        MyRunnable runnable = new MyRunnable(future.get());
-        Thread thread = new Thread(runnable);
-        thread.start();
+    RandomGenerator generator = new RandomGenerator();
 
-        for (threadNum=2; threadNum<=4; threadNum++) {
-            runnable = new MyRunnable(future.get()/threadNum);
-            thread = new Thread(runnable);
-            thread.start();
+    public double AverageMultiThreadSum(int threadNum) throws ExecutionException, InterruptedException {
+        List<Car> cars = generator.generateCars(getYearFrom(),getYearTo(),getCount());
+
+        if(threadNum == 1) {
+            for (int i = 0; i < count; i++) {
+                averageSum += cars.get(i).getPrice();
+                averageSum = ((averageSum * getParam()) / getCount());
+            }
+            ExecutorService executor = Executors.newFixedThreadPool(threadNum);
+            List<Future<Double>> myList = new ArrayList<>();
+            for (int i = 1; i <= threadNum; i++) {
+                Future<Double> future = executor.submit(new MyCallable(averageSum / threadNum, i));
+                myList.add(future);
+            }
+            for (Future<Double> f : myList) {
+                averageSum = f.get() * threadNum;
+            }
+            executor.shutdown();
+            return averageSum;
+
+        }else {
+            ExecutorService executor = Executors.newFixedThreadPool(threadNum);
+            List<Future<Double>> myList = new ArrayList<>();
+            for (int i = 1; i <= threadNum; i++) {
+                Future<Double> future = executor.submit(new MyCallable(averageSum / threadNum, i));
+                myList.add(future);
+            }
+            for (Future<Double> f : myList) {
+                averageSum = f.get() * threadNum;
+            }
+            executor.shutdown();
+            return averageSum;
         }
-        executor.shutdown();
-
-        return averageSum;
     }
     public long ExecuteTime(long startTime,long endTime) {
         long execution = 0;
@@ -51,4 +66,19 @@ public class Calculator {
         return execution;
     }
 
+    public int getYearFrom() {
+        return yearFrom;
+    }
+
+    public int getYearTo() {
+        return yearTo;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public double getParam() {
+        return param;
+    }
 }
