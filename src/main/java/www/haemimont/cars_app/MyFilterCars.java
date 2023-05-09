@@ -24,12 +24,12 @@ public class MyFilterCars {
         Calculator calculator = new Calculator(yearF,yearT,count,param);
 
         long start = System.currentTimeMillis();
-        System.out.println("Average sum for single thread is: " +calculator.AverageMultiThreadSum(1));
+        System.out.println("Average sum for single thread is: " +calculator.AverageSum(1));
         long end = System.currentTimeMillis();
         System.out.println("Execution time for single thread is: " +calculator.ExecuteTime(start,end)+ " ms");
         start = System.currentTimeMillis();
         System.out.println("Average sum for multi thread is: "
-                +calculator.AverageMultiThreadSum(Runtime.getRuntime().availableProcessors()));
+                +calculator.AverageSum(Runtime.getRuntime().availableProcessors()));
         end = System.currentTimeMillis();
         System.out.println("Execution time for multi thread is: " +calculator.ExecuteTime(start,end)+ " ms");
 

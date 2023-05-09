@@ -26,7 +26,7 @@ public class Calculator {
 
     RandomGenerator generator = new RandomGenerator();
 
-    public double AverageMultiThreadSum(int threadNum) throws ExecutionException, InterruptedException {
+    public double AverageSum(int threadNum) throws ExecutionException, InterruptedException {
         List<Car> cars = generator.generateCars(getYearFrom(),getYearTo(),getCount());
 
         if(threadNum == 1) {
