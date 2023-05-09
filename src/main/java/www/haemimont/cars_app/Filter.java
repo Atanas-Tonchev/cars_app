@@ -28,7 +28,8 @@ public class Filter {
         long end = System.currentTimeMillis();
         System.out.println("Execution time for single thread is: " +calculator.ExecuteTime(start,end)+ " ms");
         start = System.currentTimeMillis();
-        System.out.println("Average sum for multi thread is: " +calculator.AverageMultiThreadSum(Runtime.getRuntime().availableProcessors()));
+        System.out.println("Average sum for multi thread is: "
+                +calculator.AverageMultiThreadSum(Runtime.getRuntime().availableProcessors()));
         end = System.currentTimeMillis();
         System.out.println("Execution time for multi thread is: " +calculator.ExecuteTime(start,end)+ " ms");
 
