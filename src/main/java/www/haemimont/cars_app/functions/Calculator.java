@@ -1,7 +1,6 @@
 package www.haemimont.cars_app.functions;
 import www.haemimont.cars_app.model.Car;
 import www.haemimont.cars_app.myThread.MyCallable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -25,7 +24,7 @@ public class Calculator {
 
     RandomGenerator generator = new RandomGenerator();
 
-    public double AverageSum(int threadNum) throws ExecutionException, InterruptedException {
+    public double AverageSum(int threadNum){
         List<Car> cars = generator.generateCars(getYearFrom(),getYearTo(),getCount());
 
         if (threadNum == 1) {
@@ -40,7 +39,11 @@ public class Calculator {
                 myList.add(future);
             }
             for (Future<Double> f : myList) {
-                averageSum = f.get() * threadNum;
+                try {
+                    averageSum = f.get() * threadNum;
+                } catch (InterruptedException | ExecutionException e) {
+                    throw new RuntimeException(e);
+                }
             }
             executor.shutdown();
 
@@ -52,7 +55,11 @@ public class Calculator {
                 myList.add(future);
             }
             for (Future<Double> f : myList) {
-                averageSum = f.get() * threadNum;
+                try {
+                    averageSum = f.get() * threadNum;
+                } catch (InterruptedException | ExecutionException e) {
+                    throw new RuntimeException(e);
+                }
             }
             executor.shutdown();
         }

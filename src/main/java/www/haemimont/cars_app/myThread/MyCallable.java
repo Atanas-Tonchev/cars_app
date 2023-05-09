@@ -1,5 +1,4 @@
 package www.haemimont.cars_app.myThread;
-
 import java.util.concurrent.Callable;
 
 public class MyCallable implements Callable<Double> {
