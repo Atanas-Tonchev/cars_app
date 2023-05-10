@@ -1,4 +1,4 @@
-package www.haemimont.cars_app.model;
+package www.haemimont.carsapp.model;
 
 
 public class TypeA extends Car {
