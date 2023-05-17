@@ -5,13 +5,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 public class MultiThreadAverageSum {
-    public double averageSumMultiThread(MyCallableCalculatorPriceCars callable, double param, int count, int threadNum){
-        double averageSum = 0;
+    public double averageSumMultiThread(MyCallableCalculatorPriceCars callable,int threadNum){
         ExecutorService executor = Executors.newFixedThreadPool(threadNum);
+        double averageSum = 0;
         try {
-            for (int i = 1; i <= threadNum; i++){
+            for (int i=1; i<=threadNum; i++) {
                 Future<Double> future = executor.submit(callable);
-                averageSum = (future.get()*param/count)/threadNum;
+                averageSum = future.get() / threadNum;
             }
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
