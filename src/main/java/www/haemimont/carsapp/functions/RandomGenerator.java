@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomGenerator {
-    private static final double MIN_PRICE = 1000.00, MAX_PRICE = 2000000.00;
+    private static final double MIN_PRICE = 100.00, MAX_PRICE = 2000.00;
     private static final int MIN_YEAR = 2000,MAX_YEAR = 2055;
     static String[] carsMake = {"Audi", "BMW", "Volvo", "Mercedes", "Peugeot", "Citroen", "Opel", "Ford", "Fiat", "Alfa Romeo"
             , "Aston Martin", "Nissan", "Kia", "Honda", "Renault", "Chevrolet", "Mitsubishi", "Toyota"};

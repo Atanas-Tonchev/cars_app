@@ -1,14 +1,16 @@
 package www.haemimont.carsapp.mythread;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
-
-public class MyCallable implements Callable<Double> {
-    private final double sum;
-    public MyCallable(double sum) {
-        this.sum = sum;
+public class MyCallable implements Callable<List<Double>> {
+    private final double priceSumCars;
+    public MyCallable(double priceSumCars) {
+        this.priceSumCars = priceSumCars;
     }
     @Override
-    public Double call(){
-        //System.out.println(Thread.currentThread().getName());
-        return sum;
+    public List<Double> call(){
+        List<Double> list = new ArrayList<>();
+        list.add(priceSumCars);
+        return list;
     }
 }
