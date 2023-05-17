@@ -18,7 +18,7 @@ public class MyCallableCalculatorPriceCars implements Callable<Double>{
             double sum = cars.get(i).getPrice();
             sumPriceCars += sum;
         }
-        System.out.println(Thread.currentThread().getName());
+       // System.out.println(Thread.currentThread().getName());
         return sumPriceCars * param / cars.size();
     }
 }
