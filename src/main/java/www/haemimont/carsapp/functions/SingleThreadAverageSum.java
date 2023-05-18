@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 public class SingleThreadAverageSum {
-    public double averageSumSingle(CarAverageSumCalculator callable) {
+    public double averageSumSingle(CarAveragePriceCalculator callable) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Double> future = executor.submit(callable);
         double averageSum;

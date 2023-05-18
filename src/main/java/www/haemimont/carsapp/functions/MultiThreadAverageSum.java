@@ -15,7 +15,7 @@ public class MultiThreadAverageSum {
         for (int start = 0; start < cars.size(); start += size) {
             int end = Math.min(start + size, cars.size());
             List<Car> sublist = cars.subList(start, end);
-            doubleFuture.add(executor.submit(new CarAverageSumCalculator(sublist,param)));
+            doubleFuture.add(executor.submit(new CarAveragePriceCalculator(sublist,param)));
         }
         double averageSum = 0;
         for (Future<Double> f : doubleFuture){
