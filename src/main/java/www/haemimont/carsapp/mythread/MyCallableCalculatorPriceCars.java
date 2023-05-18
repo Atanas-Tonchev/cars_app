@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.concurrent.Callable;
 public class MyCallableCalculatorPriceCars implements Callable<Double>{
     private final double param;
-    private final int threadNum;
     private final List<Car> cars;
 
-    public MyCallableCalculatorPriceCars(List<Car> cars,double param,int threadNum) {
-        this.threadNum = threadNum;
+    public MyCallableCalculatorPriceCars(List<Car> cars,double param) {
         this.param = param;
         this.cars = cars;
     }
@@ -17,8 +15,8 @@ public class MyCallableCalculatorPriceCars implements Callable<Double>{
     public Double call(){
             double sumPriceCars = 0;
             for (int i = 0; i < cars.size(); i++) {
-                sumPriceCars += (cars.get(i).getPrice() * param / cars.size())/threadNum;
+                sumPriceCars += (cars.get(i).getPrice() * param / cars.size());
             }
-        return sumPriceCars*threadNum;
+        return sumPriceCars;
     }
 }

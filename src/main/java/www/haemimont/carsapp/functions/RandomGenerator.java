@@ -4,7 +4,6 @@ import www.haemimont.carsapp.model.TypeA;
 import www.haemimont.carsapp.model.TypeB;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-
 public class RandomGenerator {
     private static final double MIN_PRICE = 100.00, MAX_PRICE = 2000.00;
     private static final int MIN_YEAR = 2000,MAX_YEAR = 2055;

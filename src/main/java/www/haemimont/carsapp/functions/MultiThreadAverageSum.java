@@ -10,19 +10,22 @@ import java.util.concurrent.Future;
 public class MultiThreadAverageSum {
     public double averageSumMultiThread(List<Car> cars, int threadNum,double param){
         ExecutorService executor = Executors.newFixedThreadPool(threadNum);
-        List<Future<Double>> list = new ArrayList<>();
-        for (int i = 1; i <= threadNum; i++) {
-            list.add(executor.submit(new MyCallableCalculatorPriceCars(cars,param,i)));
+        List<Future<Double>> doubleFuture = new ArrayList<>();
+        int size = cars.size()/threadNum;
+        for (int start = 0; start < cars.size(); start += size) {
+            int end = Math.min(start + size, cars.size());
+            List<Car> sublist = cars.subList(start, end);
+            doubleFuture.add(executor.submit(new MyCallableCalculatorPriceCars(sublist,param)));
         }
         double averageSum = 0;
-        for (Future f : list) {
+        for (Future<Double> f : doubleFuture){
             try {
-                 averageSum = (double) f.get();
+                averageSum += f.get();
             } catch (InterruptedException | ExecutionException e) {
                 throw new RuntimeException(e);
             }
         }
         executor.shutdown();
-        return averageSum;
+        return averageSum/threadNum;
     }
 }
