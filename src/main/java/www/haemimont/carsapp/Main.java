@@ -3,7 +3,7 @@ import www.haemimont.carsapp.functions.MultiThreadAverageSum;
 import www.haemimont.carsapp.functions.RandomGenerator;
 import www.haemimont.carsapp.functions.SingleThreadAverageSum;
 import www.haemimont.carsapp.model.Car;
-import www.haemimont.carsapp.mythread.MyCallableCalculatorPriceCars;
+import www.haemimont.carsapp.functions.CarAverageSumCalculator;
 import java.util.List;
 import java.util.Scanner;
 public class Main {
@@ -17,13 +17,13 @@ public class Main {
         List<Car> cars = new RandomGenerator().generateCars(count);
         long start = System.currentTimeMillis();
         System.out.printf("Average sum for single thread is: %,.2f",
-                new SingleThreadAverageSum().averageSumSingle(new MyCallableCalculatorPriceCars(cars,param)));
+                new SingleThreadAverageSum().averageSumSingle(new CarAverageSumCalculator(cars,param)));
         long end = System.currentTimeMillis();
         long execution = end-start;
         System.out.println("\n"+"Execution time for single thread is: " +execution+  " ms");
         start = System.currentTimeMillis();
         System.out.printf("Average sum for multi thread is: %,.2f",
-                new MultiThreadAverageSum().averageSumMultiThread(cars,4,param));
+                new MultiThreadAverageSum().averageSumMultiThread(cars,Runtime.getRuntime().availableProcessors(),param));
         end = System.currentTimeMillis();
         execution = end-start;
         System.out.println("\n"+"Execution time for multi thread is: " +execution+ " ms");

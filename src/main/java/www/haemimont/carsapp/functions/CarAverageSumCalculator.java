@@ -1,12 +1,12 @@
-package www.haemimont.carsapp.mythread;
+package www.haemimont.carsapp.functions;
 import www.haemimont.carsapp.model.Car;
 import java.util.List;
 import java.util.concurrent.Callable;
-public class MyCallableCalculatorPriceCars implements Callable<Double>{
+public class CarAverageSumCalculator implements Callable<Double>{
     private final double param;
     private final List<Car> cars;
 
-    public MyCallableCalculatorPriceCars(List<Car> cars,double param) {
+    public CarAverageSumCalculator(List<Car> cars, double param) {
         this.param = param;
         this.cars = cars;
     }
